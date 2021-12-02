@@ -6,7 +6,8 @@ const products = [
 ];
 //Функция для формирования верстки каждого товара
 //Добавить в выводе изображение
-const renderProduct = (title, price) => {
+const renderProduct = (... item) => {
+    let [title, price] = item
     return `<div class="product-item">
                 <h3>${title}</h3>
                 <p>${price}</p>

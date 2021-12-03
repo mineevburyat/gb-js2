@@ -13,7 +13,8 @@ const renderProduct = (... item) => {
     let [title, price] = item
     return `<div class="product-item">
                 <h3>${title}</h3>
-                <p>${price}</p>
+                <img src="img/140x100.png" alt="placeholder">
+                <p class="price">${price}</p>
                 <button class="buy-btn">Купить</button>
             </div>`
 };

@@ -91,6 +91,15 @@ class ProductsList extends Array {
     }
 }
 
+//Корзина ничем не отличается от склада товаров, корзина принадлежит конкретному пользователю. Корзину лучше представить как ProductList c дополнительным параметром - id пользователя
+class Basket extends ProductsList {
+    constructor(user_id, ... goods) {
+        super(goods);
+        this.id = user_id;
+    }
+}
+
+
 //основная логика
 // создать список товаров и заполнить его
 let goodList = new ProductsList;

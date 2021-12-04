@@ -10,7 +10,7 @@ class Hamburger {
   removeTopping(topping) {
     this.topping.forEach((item, i) => {
       if (item == topping) {
-        item.splice(i,1);
+        this.topping.splice(i,1);
       }
     })
   }
@@ -72,9 +72,15 @@ class Hamburger {
   info() {
     return `Гамбургер ${this.size} с ${this.stuffing} и сверху ${this.topping}`;
   }
+
+  printstatus() {
+    console.log(`${this.info()} стоит ${this.calculatePrice()} рублей и содержит ${this.calculateCalories()} каллорий`);
+  }
 }
 
 const bigmac = new Hamburger('big', 'withpotatos');
 bigmac.addTopping('paper');
 bigmac.addTopping('mayonnese');
-console.log(`${bigmac.info()} стоит ${bigmac.calculatePrice()} рублей и содержит ${bigmac.calculateCalories()} каллорий`);
+bigmac.printstatus();
+bigmac.removeTopping('mayonnese');
+bigmac.printstatus();

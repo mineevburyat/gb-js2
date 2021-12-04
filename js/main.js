@@ -1,5 +1,6 @@
 // lesson2
 // Класс описывает товар: название, цена, артикул, картинка(и)
+"use strict";
 class ProductItem {
     constructor (title, price, img='140x100.png', counter=1) {
         this.title = title;

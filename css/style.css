@@ -27,3 +27,8 @@
   padding: 10px 6px;
   align-items: center;
 }
+
+.buy-btn {
+  width: 100%;
+  background-color: blue;
+}

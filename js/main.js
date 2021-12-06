@@ -1,12 +1,11 @@
 // lesson2
-// Класс описывает товар: название, цена, артикул, картинка(и)
 "use strict";
+// Класс описывает товар: название, цена, артикул, картинка(и)
 class ProductItem {
-    constructor (title, price, img='140x100.png', counter=1) {
+    constructor (title, price, img='140x100.png') {
         this.title = title;
         this.price = price;
         this.img = img;
-        this.counter = this.counter;
     }
     // Метод отображения карточки товара
     render() {
@@ -16,10 +15,6 @@ class ProductItem {
         <p class="price">${this.price}</p>
         <button class="buy-btn">Купить</button>
     </div>`
-    }
-    //общая стоимость однотипных товаров
-    totalprice() {
-        return this.counter * this.price;
     }
 }
 
@@ -82,22 +77,44 @@ class ProductsList extends Array {
             document.querySelector('.products').insertAdjacentHTML('beforeend', item.render())
         })
     }
-    //общая стоимость товаров на складе
+    //общая стоимость товара не имеет смысла, если мы не знаем сколько товаров на складе - перенести эту функцию в корзину
+}
+//Товар в корзине это ProductItem с дополнительным параметром количество однотипных товаров
+class BasketGood extends ProductItem {
+    constructor(numbergoods=1, goods) {
+        let {title, price, img} = goods;
+        super(title, price, img);
+        this.numbergoods = numbergoods;
+    }
+    //всего на сумму данного товара в корзине
+    totalSum() {
+        return(this.numbergoods * this.price)
+    }
+    //представить товар в виде html карточки
+    render() {};
+}
+//Корзину лучше представить как массив корзинных тваров c дополнительным параметром - id пользователя
+//TODO  сделать корзину пока как отдельный класс, т.к. не понятно как работать с user_id и особенностями добавления и удаления товаров в корзине.
+class Basket {
+    constructor() {
+        this.goods = [];
+        //корзина для одного пользователя пока
+        //this.id = user_id;
+    }
+    //общая стоимость товаров в корзине
     totalprice() {
-        summ = 0;
-        super.forEach((item) => {
-            summ += item.totalprice();
+        let summ = 0;
+        this.goods.forEach((item) => {
+            summ += item.totalSum();
         })
         return summ;
     }
-}
-
-//Корзина ничем не отличается от склада товаров, корзина принадлежит конкретному пользователю. Корзину лучше представить как ProductList c дополнительным параметром - id пользователя
-class Basket extends ProductsList {
-    constructor(user_id, ... goods) {
-        super(goods);
-        this.id = user_id;
+    addGoods(goods) {
+        this.goods.push(goods);
     }
+    removeGoods(goods) {}
+    //отрисовать карточки товары в блоке корзины
+    render() {};
 }
 
 
@@ -107,3 +124,13 @@ let goodList = new ProductsList;
 goodList.fetchGoods();
 // отобразить список товаров в блоке .products
 goodList.render();
+
+const user1_basket = new Basket;
+// console.log(goodList[1], goodList[2]);
+user1_basket.addGoods(new BasketGood(2, goodList[2]));
+user1_basket.addGoods(new BasketGood(3, goodList[0]));
+console.log('В корзине следующие товары:')
+user1_basket.goods.forEach((item) => {
+    console.log(`${item.title} с ценой ${item.price} и количество таких товаров ${item.numbergoods} на общую сумму ${item.totalSum()}`);
+})
+console.log(`Всего товаров на сумму: ${user1_basket.totalprice()}`);

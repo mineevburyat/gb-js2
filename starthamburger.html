@@ -4,9 +4,45 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Humburger constructor</title>
+
 </head>
 <body>
+  <div class="center">
+    <form action="#" id="humburger_form" class="form">
+      <fieldset>
+        <legend>Выберите размер гармургера</legend>
+        <select>
+          <option value="null" disabled selected value></option>
+          <option value="big">Большой</option>
+          <option value="middle">Средний</option>
+          <option value="small">Маленький</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Выберите основную начинку гармургера</legend>
+        <select>
+          <option value="null" disabled selected value></option>
+          <option value="potatos">Картофель</option>
+          <option value="sald">Салат</option>
+          <option value="chees">Сыр</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Выберите добавку</legend>
+          <input type="checkbox" value="mayoness" id="chk1"><label for="chk1">Майонез</label>
+          <input type="checkbox" value="masturd" id="chk2"><label for="chk2">Горчица</label>
+          <input type="checkbox" value="paper" id="chk3"><label for="chk3">Перец</label>
+      </fieldset>
+      <hr>
+      <input type="reset">
+      <input type="button" value="рассчитать">
+    </form>
+    <div>
+      <p>текущая стоимость: <b><span class="total" id="total">0</span> рублей</b></p>
+      <p>текущее содержание каллорий: <b><span class="callory" id="callory">0</span>каллорий</b></p>
+    </div>
+  </div>
   <script src="js/gamburger.js"></script>
 </body>
 </html>

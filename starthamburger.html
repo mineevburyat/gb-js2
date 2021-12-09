@@ -23,16 +23,16 @@
         <legend>Выберите основную начинку гармургера</legend>
         <select id="stuffing">
           <!-- <option value="null" disabled selected value></option> -->
-          <option value="potatos">Картофель</option>
-          <option value="sald">Салат</option>
-          <option value="chees">Сыр</option>
+          <option value="withpotatos">Картофель</option>
+          <option value="withsald">Салат</option>
+          <option value="withchees">Сыр</option>
         </select>
       </fieldset>
       <fieldset>
         <legend>Выберите добавку</legend>
-          <input type="checkbox" value="mayoness" id="chk1"><label for="chk1">Майонез</label>
-          <input type="checkbox" value="masturd" id="chk2"><label for="chk2">Горчица</label>
-          <input type="checkbox" value="paper" id="chk3"><label for="chk3">Перец</label>
+          <input type="checkbox" value="mayonnese" id="chk1" name="topping"><label for="chk1">Майонез</label>
+          <input type="checkbox" value="masturd" id="chk2" name="topping"><label for="chk2">Горчица</label>
+          <input type="checkbox" value="paper" id="chk3" name="topping"><label for="chk3">Перец</label>
       </fieldset>
       <hr>
       <input type="reset">
@@ -49,11 +49,15 @@
       // console.log("страница загрузилась", event);
       document.getElementById("calculate_btn").addEventListener("click", (event) => {
         // console.log("На кнопку нажали", event);
-        size = document.getElementById("size").value;
-        stuffing = document.getElementById("stuffing").value;
+        let size = document.getElementById("size").value;
+        let stuffing = document.getElementById("stuffing").value;
+        let topping = Array.from(document.querySelectorAll("input[name='topping']:checked")).map((item) => {
+          return item.value;
+        });
+        // console.log(topping);
         // console.log(size.value, stuffing.value);
-        const humburger = new Hamburger(size, stuffing);
-        console.log(humburger);
+        const humburger = new Hamburger(size, stuffing, topping);
+        console.log(humburger.info());
         humburger.totalHTML("total", "callory");
       })
     }

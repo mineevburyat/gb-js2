@@ -12,8 +12,8 @@
     <form action="#" id="humburger_form" class="form">
       <fieldset>
         <legend>Выберите размер гармургера</legend>
-        <select>
-          <option value="null" disabled selected value></option>
+        <select id="size">
+          <!-- <option value="null" disabled selected value></option> -->
           <option value="big">Большой</option>
           <option value="middle">Средний</option>
           <option value="small">Маленький</option>
@@ -21,8 +21,8 @@
       </fieldset>
       <fieldset>
         <legend>Выберите основную начинку гармургера</legend>
-        <select>
-          <option value="null" disabled selected value></option>
+        <select id="stuffing">
+          <!-- <option value="null" disabled selected value></option> -->
           <option value="potatos">Картофель</option>
           <option value="sald">Салат</option>
           <option value="chees">Сыр</option>
@@ -36,7 +36,7 @@
       </fieldset>
       <hr>
       <input type="reset">
-      <input type="button" value="рассчитать">
+      <input type="button" value="рассчитать" id="calculate_btn">
     </form>
     <div>
       <p>текущая стоимость: <b><span class="total" id="total">0</span> рублей</b></p>
@@ -44,5 +44,19 @@
     </div>
   </div>
   <script src="js/gamburger.js"></script>
+  <script>
+    window.onload = function (event) {
+      // console.log("страница загрузилась", event);
+      document.getElementById("calculate_btn").addEventListener("click", (event) => {
+        // console.log("На кнопку нажали", event);
+        size = document.getElementById("size").value;
+        stuffing = document.getElementById("stuffing").value;
+        // console.log(size.value, stuffing.value);
+        const humburger = new Hamburger(size, stuffing);
+        console.log(humburger);
+        humburger.totalHTML("total", "callory");
+      })
+    }
+  </script>
 </body>
 </html>

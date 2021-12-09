@@ -76,11 +76,19 @@ class Hamburger {
   printstatus() {
     console.log(`${this.info()} стоит ${this.calculatePrice()} рублей и содержит ${this.calculateCalories()} каллорий`);
   }
+
+  totalHTML(id_totalelement, id_calloryelement) {
+    const total = document.getElementById(id_totalelement);
+    // console.log(total);
+    const callory = document.getElementById(id_calloryelement);
+    total.textContent = this.calculatePrice();
+    callory.textContent = this.calculateCalories();
+  }
 }
 
-const bigmac = new Hamburger('big', 'withpotatos');
-bigmac.addTopping('paper');
-bigmac.addTopping('mayonnese');
-bigmac.printstatus();
-bigmac.removeTopping('mayonnese');
-bigmac.printstatus();
+// const bigmac = new Hamburger('big', 'withpotatos');
+// bigmac.addTopping('paper');
+// bigmac.addTopping('mayonnese');
+// bigmac.printstatus();
+// bigmac.removeTopping('mayonnese');
+// bigmac.printstatus();

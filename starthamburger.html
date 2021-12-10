@@ -14,9 +14,11 @@
         <legend>Выберите размер гармургера</legend>
         <select id="size">
           <!-- <option value="null" disabled selected value></option> -->
+          <option value="Мега большой" data-price="200" data-calories="80">Мега большой</option>
           <option value="Большой" data-price="100" data-calories="40">Большой</option>
           <option value="Средний" data-price="80" data-calories="30">Средний</option>
           <option value="Маленький" data-price="60" data-calories="20">Маленький</option>
+          <option value="Очень маленький" data-price="30" data-calories="10">Очень маленький</option>
         </select>
       </fieldset>
       <fieldset>
@@ -26,6 +28,8 @@
           <option value="картофель" data-price="50" data-calories="40">Картофель</option>
           <option value="салат" data-price="100" data-calories="20">Салат</option>
           <option value="сыр" data-price="100" data-calories="60">Сыр</option>
+          <option value="котлета" data-price="200" data-calories="160">Котлета</option>
+          <option value="жирная котлета" data-price="220" data-calories="260">Жирная котлета</option>
         </select>
       </fieldset>
       <fieldset>
@@ -35,8 +39,12 @@
           <label for="chk1">Майонез</label>
           <input type="checkbox" value="горчица" id="chk2" name="topping" data-price="20" data-calories="10">
           <label for="chk2">Горчица</label>
-          <input type="checkbox" value="сырный" id="chk3" name="topping" data-price="60" data-calories="60">
-          <label for="chk3">Сырный соус</label>
+          <input type="checkbox" value="васаби" id="chk3" name="topping" data-price="40" data-calories="10">
+          <label for="chk3">Васаби</label>
+          <input type="checkbox" value="чесночный" id="chk4" name="topping" data-price="30" data-calories="15">
+          <label for="chk4">Чесночный соус</label>
+          <input type="checkbox" value="сырный" id="chk5" name="topping" data-price="60" data-calories="60">
+          <label for="chk5">Сырный соус</label>
       </fieldset>
       <hr>
       <input type="reset" id="reset_btn">

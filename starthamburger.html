@@ -14,31 +14,35 @@
         <legend>Выберите размер гармургера</legend>
         <select id="size">
           <!-- <option value="null" disabled selected value></option> -->
-          <option value="big">Большой</option>
-          <option value="middle">Средний</option>
-          <option value="small">Маленький</option>
+          <option value="big" data-price="100" data-calories="40">Большой</option>
+          <option value="middle" data-price="80" data-calories="30">Средний</option>
+          <option value="small" data-price="600" data-calories="20">Маленький</option>
         </select>
       </fieldset>
       <fieldset>
         <legend>Выберите основную начинку гармургера</legend>
         <select id="stuffing">
           <!-- <option value="null" disabled selected value></option> -->
-          <option value="withpotatos">Картофель</option>
-          <option value="withsald">Салат</option>
-          <option value="withchees">Сыр</option>
+          <option value="withpotatos" data-price="50" data-calories="40">Картофель</option>
+          <option value="withsald" data-price="100" data-calories="20">Салат</option>
+          <option value="withchees" data-price="100" data-calories="60">Сыр</option>
         </select>
       </fieldset>
       <fieldset>
         <legend>Выберите добавку</legend>
-          <input type="checkbox" value="mayonnese" id="chk1" name="topping"><label for="chk1">Майонез</label>
-          <input type="checkbox" value="masturd" id="chk2" name="topping"><label for="chk2">Горчица</label>
-          <input type="checkbox" value="paper" id="chk3" name="topping"><label for="chk3">Перец</label>
+          <input type="checkbox" value="Майонез" id="chk1" name="topping" data-price="40" data-calories="40">
+          <label for="chk1">Майонез</label>
+          <input type="checkbox" value="Горчица" id="chk2" name="topping" data-price="20" data-calories="10">
+          <label for="chk2">Горчица</label>
+          <input type="checkbox" value="Сырный соус" id="chk3" name="topping" data-price="60" data-calories="60">
+          <label for="chk3">Сырный соус</label>
       </fieldset>
       <hr>
-      <input type="reset">
-      <input type="button" value="рассчитать" id="calculate_btn">
+      <input type="reset" id="reset_btn">
+      <input type="button" value="Рассчитать" id="calculate_btn">
     </form>
     <div>
+      <p>Вы хотите заказать: <b><span class="info" id="info">пока не выбрано</span></b></p>
       <p>текущая стоимость: <b><span class="total" id="total">0</span> рублей</b></p>
       <p>текущее содержание каллорий: <b><span class="callory" id="callory">0</span>каллорий</b></p>
     </div>
@@ -49,12 +53,37 @@
       // console.log("страница загрузилась", event);
       document.getElementById("calculate_btn").addEventListener("click", (event) => {
         // console.log("На кнопку нажали", event);
-        let size = document.getElementById("size").value;
-        let stuffing = document.getElementById("stuffing").value;
-        let topping = Array.from(document.querySelectorAll("input[name='topping']:checked")).map((item) => {
-          return item.value;
-        });
-        // console.log(topping);
+        //функция возвращающая объект с выбранной опцией 
+        function getSelectOptions(id_select) {
+          let returnitem;
+          [... document.getElementById(id_select).options].forEach((item) => {
+            if (item.selected) {
+            returnitem = item;
+            }
+          });
+          let obj = {
+            value : returnitem.value, 
+            text : returnitem.text,
+            price : returnitem.dataset.price,
+            callory : returnitem.dataset.calories}
+          return obj;
+        }
+        function getSelectCheckbox(name_input) {
+          let arr = [... document.querySelectorAll(`input[name=${name_input}]:checked`)]
+          let arr_obj = arr.map((item) => {
+            let obj = {
+              value : item.value, 
+              text : item.text,
+              price : item.dataset.price,
+              callory : item.dataset.calories}
+            return obj;
+          });
+        return arr_obj;
+        }
+        let size = getSelectOptions("size"); //выбранный размера гамбургера
+        let stuffing = getSelectOptions("stuffing"); //выбранная начинка 
+        let topping = getSelectCheckbox('topping'); //соусы
+        console.log(size, stuffing, topping);
         // console.log(size.value, stuffing.value);
         const humburger = new Hamburger(size, stuffing, topping);
         console.log(humburger.info());

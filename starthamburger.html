@@ -53,16 +53,12 @@
     window.onload = function (event) {
       // console.log("страница загрузилась", event);
       document.getElementById("calculate_btn").addEventListener("click", (event) => {
-        // console.log("На кнопку нажали", event);
-        let size = getSelectOptions("size"); //выбранный размера гамбургера
-        let stuffing = getSelectOptions("stuffing"); //выбранная начинка 
-        let topping = getSelectCheckbox('topping'); //соусы
-        // console.log(size, stuffing, topping);
-        // console.log(size.value, stuffing.value);
-        const humburger = new Hamburger(size, stuffing, topping);
+        const humburger = new Hamburger('size', 'stuffing', 'topping');
         // console.log(humburger.info());
-        humburger.infoHTML("info");
-        humburger.totalHTML("total", "callory");
+        humburger.textInHTMLItem("info", humburger.info());
+        humburger.textInHTMLItem("total", humburger.calculatePrice());
+        humburger.textInHTMLItem("callory", humburger.calculateCalories());
+        // humburger.totalHTML("total", "callory");
       })
     }
   </script>

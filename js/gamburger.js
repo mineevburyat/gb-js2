@@ -1,82 +1,47 @@
 class Hamburger {
   constructor(size, stuffing, topping = []) { 
-    this.size = size; //'big' or 'small'
-    this.stuffing = stuffing; //'withchees', 'withsald', 'withpotatos'
-    this.topping = topping; //'paper','mayonnese', 'mustard' and other 
+    this.size = size; //obj {value: "", text: "", price: num, calories: num}
+    this.stuffing = stuffing; //obj {value: "", text: "", price: num, calories: num}
+    this.topping = topping; //array of obj 
    }
-  addTopping(topping) {    
-    this.topping.push(topping)
+  
+  getToppingsStrList() {
+    let str = '';
+    if (this.topping.length == 0) {
+      str = "без соусов";
+    }
+    else {
+      str = 'соус: ';
+      this.topping.forEach((item) => {
+        str += item.value + ' ';
+    }) }
+    return str;
   }
-  removeTopping(topping) {
-    this.topping.forEach((item, i) => {
-      if (item == topping) {
-        this.topping.splice(i,1);
-      }
-    })
-  }
-  getToppings(topping) {
-    return this.topping
-  }
-  getSize() {
-    return this.size;
-  }
-  getStuffing() {
-    return this.stuffing
-  }
+  
   calculatePrice() {
-    let summ = 0;
-    if (this.size == 'big') {
-      summ += 100;
-    } else {
-      summ += 50;
-    }
-    if (this.stuffing == 'withchees') {
-      summ += 10;
-    } else if (this.stuffing == 'withsald' ) {
-      summ += 20;
-    } else if (this.stuffing == 'withpotatos') {
-      summ += 15;
-    }
+    let summ = this.size.price + this.stuffing.price;
     this.topping.forEach((item) => {
-      if (item == 'paper') {
-        summ += 15;
-      } else if (item == 'mayonnese') {
-        summ += 20;
-      }
+      summ += item.price;
     })
     return summ;
   }
+
   calculateCalories() {
-    let summ = 0;
-    if (this.size == 'big') {
-      summ += 40;
-    } else {
-      summ += 20;
-    }
-    if (this.stuffing == 'withchees') {
-      summ += 20;
-    } else if (this.stuffing == 'withsald' ) {
-      summ += 5;
-    } else if (this.stuffing == 'withpotatos') {
-      summ += 10;
-    }
+    let summ = this.size.calories + this.stuffing.calories;;
     this.topping.forEach((item) => {
-      if (item == 'paper') {
-        summ += 0;
-      } else if (item == 'mayonnese') {
-        summ += 5;
-      }
+      summ += item.calories;
     })
     return summ;
   }
+
   info() {
-    return `Гамбургер ${this.size} с ${this.stuffing} и сверху ${this.topping}`;
+    return `${this.size.value} гамбургер  содержит ${this.stuffing.value}, ${this.getToppingsStrList()}`;
   }
 
-  printstatus() {
-    console.log(`${this.info()} стоит ${this.calculatePrice()} рублей и содержит ${this.calculateCalories()} каллорий`);
+  infoHTML(id_info) {
+    const info = document.getElementById(id_info);
+    info.textContent = this.info();
   }
-
   totalHTML(id_totalelement, id_calloryelement) {
     const total = document.getElementById(id_totalelement);
     // console.log(total);

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Humburger constructor</title>
+
+</head>
+<body>
+  <div class="center">
+    <form action="#" id="humburger_form" class="form">
+      <fieldset>
+        <legend>Выберите размер гармургера</legend>
+        <select id="size">
+          <!-- <option value="null" disabled selected value></option> -->
+          <option value="Мега большой" data-price="200" data-calories="80">Мега большой</option>
+          <option value="Большой" data-price="100" data-calories="40">Большой</option>
+          <option value="Средний" data-price="80" data-calories="30">Средний</option>
+          <option value="Маленький" data-price="60" data-calories="20">Маленький</option>
+          <option value="Очень маленький" data-price="30" data-calories="10">Очень маленький</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Выберите основную начинку гармургера</legend>
+        <select id="stuffing">
+          <!-- <option value="null" disabled selected value></option> -->
+          <option value="картофель" data-price="50" data-calories="40">Картофель</option>
+          <option value="салат" data-price="100" data-calories="20">Салат</option>
+          <option value="сыр" data-price="100" data-calories="60">Сыр</option>
+          <option value="котлета" data-price="200" data-calories="160">Котлета</option>
+          <option value="жирная котлета" data-price="220" data-calories="260">Жирная котлета</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <!-- valu название приправы с маленькой буквы, data-price - цена,  -->
+        <legend>Выберите добавку</legend>
+          <input type="checkbox" value="майонез" id="chk1" name="topping" data-price="40" data-calories="40">
+          <label for="chk1">Майонез</label>
+          <input type="checkbox" value="горчица" id="chk2" name="topping" data-price="20" data-calories="10">
+          <label for="chk2">Горчица</label>
+          <input type="checkbox" value="васаби" id="chk3" name="topping" data-price="40" data-calories="10">
+          <label for="chk3">Васаби</label>
+          <input type="checkbox" value="чесночный" id="chk4" name="topping" data-price="30" data-calories="15">
+          <label for="chk4">Чесночный соус</label>
+          <input type="checkbox" value="сырный" id="chk5" name="topping" data-price="60" data-calories="60">
+          <label for="chk5">Сырный соус</label>
+      </fieldset>
+      <hr>
+      <input type="reset" id="reset_btn">
+      <input type="button" value="Рассчитать" id="calculate_btn">
+    </form>
+    <div>
+      <p>Вы хотите заказать: <b><span class="info" id="info">пока не выбрано</span></b></p>
+      <p>текущая стоимость: <b><span class="total" id="total">0</span> рублей</b></p>
+      <p>текущее содержание каллорий: <b><span class="callory" id="callory">0</span>каллорий</b></p>
+    </div>
+  </div>
+  <script src="js/gamburger.js"></script>
+  <script>
+    window.onload = function (event) {
+      // console.log("страница загрузилась", event);
+      document.getElementById("calculate_btn").addEventListener("click", (event) => {
+        const humburger = new Hamburger('size', 'stuffing', 'topping');
+        // console.log(humburger.info());
+        humburger.textInHTMLItem("info", humburger.info());
+        humburger.textInHTMLItem("total", humburger.calculatePrice());
+        humburger.textInHTMLItem("callory", humburger.calculateCalories());
+        // humburger.totalHTML("total", "callory");
+      })
+    }
+  </script>
+</body>
+</html>

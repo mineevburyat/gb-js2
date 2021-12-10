@@ -54,40 +54,13 @@
       // console.log("страница загрузилась", event);
       document.getElementById("calculate_btn").addEventListener("click", (event) => {
         // console.log("На кнопку нажали", event);
-        //функция возвращающая объект с выбранной опцией 
-        function getSelectOptions(id_select) {
-          let returnitem;
-          [... document.getElementById(id_select).options].forEach((item) => {
-            if (item.selected) {
-            returnitem = item;
-            }
-          });
-          let obj = {
-            value : returnitem.value, 
-            text : returnitem.text,
-            price : parseInt(returnitem.dataset.price),
-            calories : + returnitem.dataset.calories}
-          return obj;
-        }
-        function getSelectCheckbox(name_input) {
-          let arr = [... document.querySelectorAll(`input[name=${name_input}]:checked`)]
-          let arr_obj = arr.map((item) => {
-            let obj = {
-              value : item.value, 
-              text : item.text,
-              price :  parseInt(item.dataset.price),
-              calories : parseInt(item.dataset.calories)}
-            return obj;
-          });
-        return arr_obj;
-        }
         let size = getSelectOptions("size"); //выбранный размера гамбургера
         let stuffing = getSelectOptions("stuffing"); //выбранная начинка 
         let topping = getSelectCheckbox('topping'); //соусы
-        console.log(size, stuffing, topping);
+        // console.log(size, stuffing, topping);
         // console.log(size.value, stuffing.value);
         const humburger = new Hamburger(size, stuffing, topping);
-        console.log(humburger.info());
+        // console.log(humburger.info());
         humburger.infoHTML("info");
         humburger.totalHTML("total", "callory");
       })

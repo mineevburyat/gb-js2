@@ -1,3 +1,32 @@
+class paramObj {
+  constructor(element) {
+    this.value = element.value;
+    this.price = +element.dataset.price;
+    this.calories = +element.dataset.calories;
+  }
+}
+//функция возвращающая объект с выбранной опцией 
+function getSelectOptions(id_select) {
+  let returnitem;
+  [... document.getElementById(id_select).options].forEach((item) => {
+    if (item.selected) {
+    returnitem = item;
+    }
+  });
+  let obj = new paramObj(returnitem);
+  return obj;
+}
+//функция возвращает массив объектов
+function getSelectCheckbox(name_input) {
+  let arr = [... document.querySelectorAll(`input[name=${name_input}]:checked`)]
+  let arr_obj = arr.map((item) => {
+    let obj = new paramObj(item);
+    return obj;
+  });
+return arr_obj;
+}
+
+
 class Hamburger {
   constructor(size, stuffing, topping = []) { 
     this.size = size; //obj {value: "", text: "", price: num, calories: num}

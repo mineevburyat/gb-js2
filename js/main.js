@@ -76,6 +76,60 @@ class ProductItem {
     }
 }
 
+// let list = new ProductsList();
+// console.log(list.allProducts);
+
+class CartItem extends ProductItem {
+    constructor (productItem, total=1) {
+        super(productItem);
+        this.total = total;
+    }
+
+    render() {
+        return `<div class="cartitem">
+                    ${super.render()}
+                    <div class="cartitem__total">
+                        <input type="number" value="${this.total}">${this.total}</input>
+                        <button class="cartitem__add>+</button>
+                    </div>
+                </div>`
+    }
+}
+
+class Cart {
+    constructor(container = '.cart'){
+        this.container = container;
+        this.cart = [];//массив товаров из JSON документа
+        this._getCart()
+            .then(data => { //data - объект js
+                 this.cart = data;
+                 this.render()
+            });
+    }
+    _getCart(){
+        return fetch(`${API}/getBasket.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            });
+       
+    }
+    calcSum(){
+        return this.allProducts.reduce((accum, item) => accum += item.price, 0);
+    }
+    render(){
+        const block = document.querySelector(this.container);
+        for (let product of this.cart.contents){
+            const cartItemObj = new ProductItem(product);
+//            this.allProducts.push(productObj);
+            block.insertAdjacentHTML('beforeend', cartItemObj.render());
+        }
+    }
+
+}
+
 let list = new ProductsList();
 console.log(list.allProducts);
 
+let cart = new Cart();
+console.log(cart);

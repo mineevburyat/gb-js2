@@ -5,31 +5,40 @@
     <title>Интернет-магазин</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
-</head> 
+</head>
 <body>
     <header>
         <div class="logo">E-shop</div>
-        <button class="btn-cart" type="button" id="cart_btn">Корзина</button>
+        <div class="cart">
+            <form action="#" class="search-form">
+                <input type="text" class="search-field">
+                <button class="btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <button class="btn-cart" type="button">Корзина</button>
+            <div class="cart-block invisible"></div>
+        </div>
     </header>
     <main>
-        <div class="cart" id ="cart_box" style="display: none;"></div>
         <div class="products"></div>
     </main>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script>
-        let list = new ProductsList();
-        let cart = new Cart();
-        window.onload = () => {
-            document.getElementById('cart_btn').addEventListener('click', () => {
-                const cart_block = document.getElementById('cart_box');
-                console.log(cart_block.style.display);
-                if (cart_block.style.display === 'none') {
-                    cart_block.style.display = 'block';
-                } else {
-                    cart_block.style.display = 'none';
-                }
-            })
-        }
-    </script>
 </body>
 </html>
+
+<!--<div class="cart-item" data-id="${this.id_product}">-->
+    <!--<div class="product-bio">-->
+        <!--<img src="${this.img}" alt="Some image">-->
+        <!--<div class="product-desc">-->
+            <!--<p class="product-title">${this.product_name}</p>-->
+            <!--<p class="product-quantity">Quantity: ${this.quantity}</p>-->
+            <!--<p class="product-single-price">$${this.price} each</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="right-block">-->
+        <!--<p class="product-price">${this.quantity*this.price}</p>-->
+        <!--<button class="del-btn" data-id="${this.id_product}">&times;</button>-->
+    <!--</div>-->
+<!--</div>-->

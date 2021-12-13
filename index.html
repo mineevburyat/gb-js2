@@ -12,15 +12,22 @@
         <button class="btn-cart" type="button" id="cart_btn">Корзина</button>
     </header>
     <main>
-        <div class="cart hiddecart" id ="cart_box" ></div>
+        <div class="cart" id ="cart_box" style="display: none;"></div>
         <div class="products"></div>
     </main>
     <script src="js/main.js"></script>
     <script>
+        let list = new ProductsList();
+        let cart = new Cart();
         window.onload = () => {
             document.getElementById('cart_btn').addEventListener('click', () => {
-                cart = new Cart();
-                document.getElementById('cart_box').classList.toggle('hiddecart', false);
+                const cart_block = document.getElementById('cart_box');
+                console.log(cart_block.style.display);
+                if (cart_block.style.display === 'none') {
+                    cart_block.style.display = 'block';
+                } else {
+                    cart_block.style.display = 'none';
+                }
             })
         }
     </script>

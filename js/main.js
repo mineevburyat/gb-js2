@@ -128,8 +128,8 @@ class Cart {
 
 }
 
-let list = new ProductsList();
-console.log(list.allProducts);
+// let list = new ProductsList();
+// console.log(list.allProducts);
 
-let cart = new Cart();
-console.log(cart);
+// let cart = new Cart();
+// console.log(cart);

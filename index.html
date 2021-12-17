@@ -18,11 +18,12 @@
     <script src="js/main.js"></script>
     <script>
         let list = new ProductsList();
-        let cart = new Cart();
+        let cart = new CartList();
+        console.log(cart.calcSum());
         window.onload = () => {
             document.getElementById('cart_btn').addEventListener('click', () => {
                 const cart_block = document.getElementById('cart_box');
-                console.log(cart_block.style.display);
+                console.log(cart);
                 if (cart_block.style.display === 'none') {
                     cart_block.style.display = 'block';
                 } else {

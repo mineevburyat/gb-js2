@@ -43,8 +43,10 @@ class ProductsList {
        
     }
     calcSum(){
+        console.log(this.allProducts);
         return this.allProducts.reduce((accum, item) => accum += item.price, 0);
     }
+
     render(){
         const block = document.querySelector(this.container);
         for (let product of this.goods){
@@ -79,31 +81,38 @@ class ProductItem {
 // let list = new ProductsList();
 // console.log(list.allProducts);
 
-class CartItem extends ProductItem {
-    constructor (productItem, total=1) {
-        super(productItem);
-        this.total = total;
+class CartItem {
+    // {id_product: 123, product_name: 'Ноутбук', price: 45600, quantity: 1}
+    constructor(product, img = 'https://via.placeholder.com/200x150'){
+        this.title = product.product_name;
+        this.price = product.price;
+        this.id = product.id_product;
+        this.img = img;
+        this.quantity = product.quantity;
     }
-
-    render() {
-        return `<div class="cartitem">
-                    ${super.render()}
-                    <div class="cartitem__total">
-                        <input type="number" value="${this.total}">${this.total}</input>
-                        <button class="cartitem__add>+</button>
-                    </div>
-                </div>`
+    render(){
+        return `<div class="cart-item" data-id="cart${this.id}">
+                <img src="${this.img}" alt="Some img">
+                <div class="desc">
+                    <h3>${this.title}</h3>
+                    <p>${this.price} $</p>
+                    <input type="number">${this.quantity}</input>
+                    <button class="buy-btn">Удалить</button>
+                </div>
+            </div>`
     }
 }
 
-class Cart {
+class CartList {
     constructor(container = '.cart'){
         this.container = container;
-        this.cart = [];//массив товаров из JSON документа
+        this.cart = [];
         this._getCart()
             .then(data => { //data - объект js
-                 this.cart = data;
-                 this.render()
+                data.contents.forEach((item) => {
+                    this.cart.push(new CartItem(item));
+                });
+                this.render()
             });
     }
     _getCart(){
@@ -114,15 +123,15 @@ class Cart {
             });
        
     }
+
     calcSum(){
-        return this.allProducts.reduce((accum, item) => accum += item.price, 0);
+        return this.cart.reduce((accum, item) => accum += item.price, 0);
     }
+
     render(){
         const block = document.querySelector(this.container);
-        for (let product of this.cart.contents){
-            const cartItemObj = new ProductItem(product);
-//            this.allProducts.push(productObj);
-            block.insertAdjacentHTML('beforeend', cartItemObj.render());
+        for (let product of this.cart){
+            block.insertAdjacentHTML('beforeend', product.render());
         }
     }
 
@@ -133,3 +142,6 @@ class Cart {
 
 // let cart = new Cart();
 // console.log(cart);
+
+// const mycart = new Cart();
+// console.log(mycart.calcSum());

@@ -96,7 +96,7 @@ class CartItem {
                 <div class="desc">
                     <h3>${this.title}</h3>
                     <p>${this.price} $</p>
-                    <input type="number">${this.quantity}</input>
+                    <label>Количество: <input type="number" value="${this.quantity}"></label>
                     <button class="buy-btn">Удалить</button>
                 </div>
             </div>`
